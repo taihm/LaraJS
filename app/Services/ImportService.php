@@ -13,7 +13,7 @@ class ImportService extends BaseService
         $data   = head(Excel::toArray($import, request()->file('file')));
         $chunk  = collect($data)->chunk(1000);
         $i      = 0;
-
+        dd(count($chunk));
         foreach ($chunk as $data) {
             foreach ($data as $row) {
                 //Skip Row Title

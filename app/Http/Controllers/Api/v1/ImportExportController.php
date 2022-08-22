@@ -27,25 +27,30 @@ class ImportExportController extends Controller
         $this->importService = $importService;
     }
 
-    public function import(ImportRequest $request)
+    public function index()
     {
-        if ($request->validator->fails()) {
-            return redirect()->back()->withErrors($request->validator);
-        }
+        return view('Import');
+    }
+
+    public function import(Request $request)
+    {dd('here');
+//        if ($request->validator->fails()) {
+//            return redirect()->back()->withErrors($request->validator);
+//        }
 
         try {
             $import = $this->importService->import();
 
-            if($import != null) {
-                if($import[0] == 'no-finger-leave') {
-                    return redirect()->back()->with(['error_vt' => $import[1].' '.trans('message.nofingerprint_at').' '. $import[2]]);
-                }
-            }
-
-            if($request->notify)
-            {
-                event(new ImportExcel(1));
-            }
+//            if($import != null) {
+//                if($import[0] == 'no-finger-leave') {
+//                    return redirect()->back()->with(['error_vt' => $import[1].' '.trans('message.nofingerprint_at').' '. $import[2]]);
+//                }
+//            }
+//
+//            if($request->notify)
+//            {
+//                event(new ImportExcel(1));
+//            }
 
         }  catch (\Exception $ex) {
             return redirect()->back()->with('alert_error', $ex->getMessage());

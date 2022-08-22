@@ -16,6 +16,11 @@ return [
         'name' => 'Name',
         'description' => 'Description',
     ],
+    'data_excel' => [
+		'id' => 'ID',
+        'name' => 'Name',
+        'content' => 'Content',
+	],
     //{{LANG_TABLE_NOT_DELETE_THIS_LINE}}
     'texts' => [
         'count' => 'Showing {from} to {to} of {count} records|{count} records|One record',
