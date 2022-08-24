@@ -14,16 +14,17 @@
               label="File Upload"
               prop="importFile"
             >
-              <el-upload
-                ref="importFile"
-                v-model="form.importFile"
-                action="#"
-                :on-success="handleAvatarSuccess"
-                :auto-upload="false"
-              >
-                <el-button slot="trigger" size="small" type="primary">select file</el-button>
-                <div slot="tip" class="el-upload__tip">xlsx file with a size less than 200MB</div>
-              </el-upload>
+<!--              <el-upload-->
+<!--                ref="importFile"-->
+<!--                v-model="form.importFile"-->
+<!--                action="#"-->
+<!--                :on-success="handleAvatarSuccess"-->
+<!--                :auto-upload="false"-->
+<!--              >-->
+<!--                <el-button slot="trigger" size="small" type="primary">select file</el-button>-->
+<!--                <div slot="tip" class="el-upload__tip">xlsx file with a size less than 200MB</div>-->
+<!--              </el-upload>-->
+              <el-input id="importFile" ref="importFile" v-model="form.importFile" type="file"></el-input>
             </el-form-item>
 
           </el-form-item>
@@ -108,11 +109,23 @@ export default {
           center: true,
         }).then(async () => {
           try {
+            const file = document.querySelector('#importFile').files[0];
+            if (file === undefined) {
+              this.$message({
+                showClose: true,
+                message: 'undefined',
+                type: 'error',
+              });
+            }
+            console.log(file);
+            const formData = new FormData();
+            formData.set('importFile', file);
             this.loading.button = true;
            // await dataExcelResource.import(this.form);
             const {
               data: { message: dataExcel },
-            } = await dataExcelResource.import(this.form);
+            } = await dataExcelResource.import(formData);
+            console.log('abc');
            this.$message({
              showClose: true,
              message: dataExcel,
@@ -121,6 +134,7 @@ export default {
            this.loading.button = false;
          //   await this.$router.push({ name: 'DataExcel' });
           } catch (e) {
+            console.log(e);
             this.loading.button = false;
           }
         });

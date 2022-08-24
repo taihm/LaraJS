@@ -45,6 +45,7 @@ class ImportJob implements ShouldQueue
         foreach ($chunk as $data) {
             foreach ($data as $row) {
                 $dataInsert = [];
+                $dataInsert['name'] = $row['user'];
                 $dataInsert['content'] = $row['description'];
                 $dataInsert['created_at'] = Carbon::now();
                 $insert_data[] = $dataInsert;

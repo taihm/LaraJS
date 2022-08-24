@@ -4,8 +4,9 @@ namespace App\Imports;
 
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithChunkReading;
+use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
-class DataRawImport implements ToModel, WithChunkReading
+class DataRawImport implements ToModel, WithHeadingRow, WithChunkReading
 {
     /**
      * @param array $row
