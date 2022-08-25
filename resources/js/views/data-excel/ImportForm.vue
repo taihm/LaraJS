@@ -108,6 +108,13 @@ export default {
           type: 'warning',
           center: true,
         }).then(async () => {
+          const loading = this.$loading({
+            lock: true,
+            text: 'Uploading...',
+            spinner: 'el-icon-loading',
+            background: 'rgba(0, 0, 0, 0.7)',
+          });
+
           try {
             const file = document.querySelector('#importFile').files[0];
             if (file === undefined) {
@@ -117,28 +124,36 @@ export default {
                 type: 'error',
               });
             }
-            console.log(file);
             const formData = new FormData();
             formData.set('importFile', file);
-            this.loading.button = true;
+            // this.loading.button = true;
+            setTimeout(() => {
+              loading.text = 'Inserting data';
+            }, 2000);
            // await dataExcelResource.import(formData);
-            const {
-              data: { message: dataExcel },
-            } = await dataExcelResource.import(formData);
-           this.$message({
-             showClose: true,
-             message: dataExcel,
-             type: 'success',
-           });
-           this.loading.button = false;
+            const data = await dataExcelResource.import(formData);
+
+           if (data !== undefined) {
+             this.$message({
+               showClose: true,
+               message: 'Done',
+               type: 'success',
+             });
+             loading.close();
+           } else {
+             await dataExcelResource.isBatchFinished();
+           }
+
+           // this.loading.button = false;
            // await this.$router.push({ name: 'DataExcel' });
           } catch (e) {
-            this.$message({
-              showClose: true,
-              message: e,
-              type: 'error',
-            });
-            this.loading.button = false;
+            // this.$message({
+            //   showClose: true,
+            //   message: e,
+            //   type: 'error',
+            // });
+            loading.text = e;
+            // this.loading.button = false;
           }
         });
       });

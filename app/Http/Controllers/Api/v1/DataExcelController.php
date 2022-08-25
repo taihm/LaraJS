@@ -12,6 +12,7 @@ namespace App\Http\Controllers\Api\v1;
 use App\Jobs\ImportJob;
 use App\Models\DataExcel;
 use App\Services\QueryService;
+use Illuminate\Bus\Batch;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Http\Controllers\Controller;
@@ -154,12 +155,16 @@ class DataExcelController extends Controller
                 $extensionFile = $request->file('importFile')->getClientOriginalExtension();
                 $fileName = $disk->putFileAs('/imports', $request->file('importFile'), $nameFile . '.' . $extensionFile);
                 $fileName = 'public/' . $fileName;
-//                $batch = \Bus::batch([
-//                    new ImportJob($fileName),
-//                ])->dispatch();
+                $batch = \Bus::batch([
+                    new ImportJob($fileName),
+                ])->catch(function (Batch $batch, \Throwable $e) {
+                    return $this->jsonMessage($e);
+                })->finally(function (Batch $batch) {
+                    return $this->jsonMessage('finally');
+                })->dispatch();
 //                ImportJob::dispatch($fileName);
-
-                return $this->jsonMessage('upload done, path: ' .$fileName);
+//                \Bus::findBatch($batch->id);
+                return $this->jsonMessage('upload done, path: ' .$fileName . '; batch_id='.$batch->id);
             }
             return $this->jsonMessage('not upload file');
         } catch (\Exception $e) {
