@@ -121,20 +121,23 @@ export default {
             const formData = new FormData();
             formData.set('importFile', file);
             this.loading.button = true;
-           // await dataExcelResource.import(this.form);
+           // await dataExcelResource.import(formData);
             const {
               data: { message: dataExcel },
             } = await dataExcelResource.import(formData);
-            console.log('abc');
            this.$message({
              showClose: true,
              message: dataExcel,
              type: 'success',
            });
            this.loading.button = false;
-         //   await this.$router.push({ name: 'DataExcel' });
+           // await this.$router.push({ name: 'DataExcel' });
           } catch (e) {
-            console.log(e);
+            this.$message({
+              showClose: true,
+              message: e,
+              type: 'error',
+            });
             this.loading.button = false;
           }
         });

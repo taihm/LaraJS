@@ -154,9 +154,12 @@ class DataExcelController extends Controller
                 $extensionFile = $request->file('importFile')->getClientOriginalExtension();
                 $fileName = $disk->putFileAs('/imports', $request->file('importFile'), $nameFile . '.' . $extensionFile);
                 $fileName = 'public/' . $fileName;
-                $url      = $disk->url($fileName);
-                ImportJob::dispatch($fileName);
-                return $this->jsonMessage('path: ' . $fileName);
+//                $batch = \Bus::batch([
+//                    new ImportJob($fileName),
+//                ])->dispatch();
+//                ImportJob::dispatch($fileName);
+
+                return $this->jsonMessage('upload done, path: ' .$fileName);
             }
             return $this->jsonMessage('not upload file');
         } catch (\Exception $e) {
