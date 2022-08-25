@@ -126,34 +126,16 @@ export default {
             }
             const formData = new FormData();
             formData.set('importFile', file);
-            // this.loading.button = true;
+            dataExcelResource.import(formData);
             setTimeout(() => {
-              loading.text = 'Inserting data';
-            }, 2000);
-           // await dataExcelResource.import(formData);
-            const data = await dataExcelResource.import(formData);
-
-           if (data !== undefined) {
-             this.$message({
-               showClose: true,
-               message: 'Done',
-               type: 'success',
-             });
-             loading.close();
-           } else {
-             await dataExcelResource.isBatchFinished();
-           }
-
-           // this.loading.button = false;
-           // await this.$router.push({ name: 'DataExcel' });
+              loading.close();
+              this.$router.push({ name: 'DataExcel' });
+            }, 5000);
           } catch (e) {
-            // this.$message({
-            //   showClose: true,
-            //   message: e,
-            //   type: 'error',
-            // });
             loading.text = e;
-            // this.loading.button = false;
+            setTimeout(() => {
+              loading.close();
+            }, 3000);
           }
         });
       });
