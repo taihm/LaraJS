@@ -67,6 +67,17 @@ const dataExcel = {
         icon: 'record_create',
       },
     },
+    {
+      path: 'batch',
+      name: 'DataExcelBatch',
+      hidden: true,
+      component: () => import('@/views/data-excel/indexBatch'),
+      meta: {
+        activeMenu: '/data-excels',
+        title: 'data_excel',
+        icon: 'list',
+      },
+    },
   ],
 };
 

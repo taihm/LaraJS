@@ -15,6 +15,7 @@ Route::post('/login', 'AuthController@login');
 
 Route::group(['prefix' => 'data-excels'], function () {
     Route::get('export', 'DataExcelController@export');
+    Route::get('batch', 'DataExcelController@getBatch');
     Route::post('import', 'DataExcelController@import');
 });
 // END - Auth

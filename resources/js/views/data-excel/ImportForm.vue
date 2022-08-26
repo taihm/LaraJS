@@ -14,19 +14,8 @@
               label="File Upload"
               prop="importFile"
             >
-<!--              <el-upload-->
-<!--                ref="importFile"-->
-<!--                v-model="form.importFile"-->
-<!--                action="#"-->
-<!--                :on-success="handleAvatarSuccess"-->
-<!--                :auto-upload="false"-->
-<!--              >-->
-<!--                <el-button slot="trigger" size="small" type="primary">select file</el-button>-->
-<!--                <div slot="tip" class="el-upload__tip">xlsx file with a size less than 200MB</div>-->
-<!--              </el-upload>-->
               <el-input id="importFile" ref="importFile" v-model="form.importFile" type="file"></el-input>
             </el-form-item>
-
           </el-form-item>
           <el-form-item class="tw-flex tw-justify-end">
             <router-link v-slot="{ href, navigate }" :to="{ name: 'DataExcel' }" custom>
@@ -129,7 +118,7 @@ export default {
             dataExcelResource.import(formData);
             setTimeout(() => {
               loading.close();
-              this.$router.push({ name: 'DataExcel' });
+              this.$router.push({ name: 'DataExcelBatch' });
             }, 5000);
           } catch (e) {
             loading.text = e;

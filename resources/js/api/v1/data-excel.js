@@ -13,6 +13,13 @@ export default class DataExcelResource extends Resource {
     super('/data-excels');
   }
 
+  listBatch() {
+    return request({
+      url: 'data-excels/batch',
+      method: 'get',
+    });
+  }
+
   import(resource) {
     return request({
       url: 'data-excels/import',

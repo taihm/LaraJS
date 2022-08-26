@@ -13,6 +13,7 @@ use App\Jobs\ImportJob;
 use App\Models\DataExcel;
 use App\Services\QueryService;
 use Illuminate\Bus\Batch;
+use Illuminate\Bus\BatchRepository;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Http\Controllers\Controller;
@@ -23,16 +24,20 @@ use Illuminate\Support\Str;
 
 class DataExcelController extends Controller
 {
+
+    private BatchRepository $batchRepository;
     /**
      * DataExcel constructor.
      * @author tanmnt
      */
-    public function __construct()
+    public function __construct(BatchRepository $batchRepository)
     {
         $this->middleware('permission:' . \ACL::PERMISSION_VISIT, ['only' => ['index']]);
         $this->middleware('permission:' . \ACL::PERMISSION_CREATE, ['only' => ['store']]);
         $this->middleware('permission:' . \ACL::PERMISSION_EDIT, ['only' => ['show', 'update']]);
         $this->middleware('permission:' . \ACL::PERMISSION_DELETE, ['only' => ['destroy']]);
+
+        $this->batchRepository = $batchRepository;
     }
 
     /**
@@ -176,6 +181,20 @@ class DataExcelController extends Controller
     public function export()
     {
         return $this->jsonMessage('function export');
+    }
+
+    public function getBatch(): JsonResponse
+    {
+//        $batchRepository = app()->make(BatchRepository::class);
+        $result = $this->batchRepository->get(5);
+        return response()->json(
+            [
+                'success' => true,
+                'data' => $result,
+                'count' => count($result),
+            ],
+            200
+        );
     }
     //{{CONTROLLER_RELATIONSHIP_NOT_DELETE_THIS_LINE}}
 }
