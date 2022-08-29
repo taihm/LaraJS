@@ -53,7 +53,7 @@
               </el-table-column>
               <el-table-column data-generator="progress" prop="progress" label="Progress" align="center" header-align="center" width="100px">
                 <template slot-scope="{ row }">
-                  {{ row.progress }} %
+                  <el-progress :key="testKey" :width="60" type="circle" :percentage="row.progress" :color="colors"></el-progress>
                 </template>
               </el-table-column>
               <!--{{$TEMPLATES_NOT_DELETE_THIS_LINE$}}-->
@@ -100,7 +100,22 @@
           total: 0,
           loading: false,
         },
+        colors: [
+          { color: '#f56c6c', percentage: 20 },
+          { color: '#e6a23c', percentage: 40 },
+          { color: '#6f7ad3', percentage: 60 },
+          { color: '#1989fa', percentage: 80 },
+          { color: '#5cb87a', percentage: 100 },
+        ],
+        testKey: 0,
+        currentInterval: null,
       };
+    },
+    mounted() {
+      this.currentInterval = setInterval(() => {
+        // this.testKey++;
+        this.getList();
+      }, 5000);
     },
     watch: {
       'table.listQuery.search': debounce(function () {
@@ -120,6 +135,14 @@
             if (item.finishedAt !== null) {
               item.status = 1;
             }
+            if (item.finishedAt === null) {
+              this.testKey++;
+            }
+          }
+          let abc = false;
+          abc = this.table.list.filter(element => element.status !== 1);
+          if (abc.length === 0) {
+            clearInterval(this.currentInterval);
           }
           this.table.total = data.count;
           this.table.loading = false;
@@ -129,6 +152,7 @@
       },
       handleFilter() {
         this.table.listQuery.page = 1;
+        this.testKey++;
         this.getList();
       },
       changeDateRangePicker(date) {
@@ -146,6 +170,11 @@
         this.table.listQuery.orderBy = prop;
         this.table.listQuery.ascending = order;
         this.getList();
+      },
+      refreshTimeToRender() {
+        // setInterval(() => {
+        //   this.testKey++;
+        // }, 5000);
       },
       remove(id) {
         this.$confirm(this.$t('messages.delete_confirm', { attribute: this.$t('table.data_excel.id') + '#' + id }), this.$t('messages.warning'), {

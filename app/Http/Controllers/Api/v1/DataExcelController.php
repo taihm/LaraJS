@@ -25,19 +25,16 @@ use Illuminate\Support\Str;
 class DataExcelController extends Controller
 {
 
-    private BatchRepository $batchRepository;
     /**
      * DataExcel constructor.
      * @author tanmnt
      */
-    public function __construct(BatchRepository $batchRepository)
+    public function __construct()
     {
         $this->middleware('permission:' . \ACL::PERMISSION_VISIT, ['only' => ['index']]);
         $this->middleware('permission:' . \ACL::PERMISSION_CREATE, ['only' => ['store']]);
         $this->middleware('permission:' . \ACL::PERMISSION_EDIT, ['only' => ['show', 'update']]);
         $this->middleware('permission:' . \ACL::PERMISSION_DELETE, ['only' => ['destroy']]);
-
-        $this->batchRepository = $batchRepository;
     }
 
     /**
@@ -183,10 +180,13 @@ class DataExcelController extends Controller
         return $this->jsonMessage('function export');
     }
 
+    /**
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
+     */
     public function getBatch(): JsonResponse
     {
-//        $batchRepository = app()->make(BatchRepository::class);
-        $result = $this->batchRepository->get(5);
+        $batchRepository = app()->make(BatchRepository::class);
+        $result = $batchRepository->get(5);
         return response()->json(
             [
                 'success' => true,
