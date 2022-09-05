@@ -12,6 +12,12 @@ Route::post('/reset-password', 'AuthController@resetPassword');
 Route::post('/fe-login', 'AuthController@feLogin');
 Route::post('/refresh-token', 'AuthController@refreshToken');
 Route::post('/login', 'AuthController@login');
+
+Route::group(['prefix' => 'data-excels'], function () {
+    Route::get('export', 'DataExcelController@export');
+    Route::get('batch', 'DataExcelController@getBatch');
+    Route::post('import', 'DataExcelController@import');
+});
 // END - Auth
 Route::group(['middleware' => 'auth:api'], function () {
     Route::get('/fe-logout', 'AuthController@feLogout');
@@ -44,6 +50,9 @@ Route::group(['middleware' => 'auth:api'], function () {
         //{{ROUTE_ADMIN_NOT_DELETE_THIS_LINE}}
     });
 
+    /*<==> DataExcel Route - 2022-08-02 23:43:11 <==>*/
+
+    Route::apiResource('data-excels', 'DataExcelController');
     //{{ROUTE_USER_NOT_DELETE_THIS_LINE}}
 });
 
