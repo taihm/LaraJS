@@ -2,32 +2,6 @@
   <el-row>
     <el-col :span="24">
       <el-card>
-        <div slot="header" class="tw-flex tw-justify-end">
-          <div class="tw-grid tw-grid-cols-2 tw-gap-1">
-          </div>
-        </div>
-        <el-row :gutter="20" type="flex" justify="space-between" class="tw-mb-6 tw-flex-wrap">
-          <el-col :xs="24" :sm="10" :md="6">
-            <label>{{ $t('table.texts.filter') }}</label>
-            <el-input
-              v-model="table.listQuery.search"
-              class="tw-w-full"
-              :placeholder="$t('table.texts.filterPlaceholder')"
-            />
-          </el-col>
-          <el-col :xs="24" :sm="14" :md="10">
-            <br />
-            <el-date-picker
-              v-model="table.listQuery.updated_at"
-              class="tw-w-full"
-              type="daterange"
-              :start-placeholder="$t('date.start_date')"
-              :end-placeholder="$t('date.end_date')"
-              :picker-options="pickerOptions"
-              @change="changeDateRangePicker"
-            />
-          </el-col>
-        </el-row>
         <el-row :gutter="20">
           <el-col :span="24" class="table-responsive">
             <el-table
@@ -113,7 +87,6 @@
     },
     mounted() {
       this.currentInterval = setInterval(() => {
-        // this.testKey++;
         this.getList();
       }, 5000);
     },

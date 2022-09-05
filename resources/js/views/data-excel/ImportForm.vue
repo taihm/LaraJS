@@ -71,13 +71,11 @@ export default {
     },
   },
   async created() {
-    console.log('created');
     // dataExcelResource.export().then(res => {
     //   console.log(res);
     // });
   },
   async mounted() {
-    console.log('mounted');
     // dataExcelResource.export().then(res => {
     //   console.log(res);
     //   });
@@ -119,7 +117,7 @@ export default {
             setTimeout(() => {
               loading.close();
               this.$router.push({ name: 'DataExcelBatch' });
-            }, 5000);
+            }, 10000);
           } catch (e) {
             loading.text = e;
             setTimeout(() => {

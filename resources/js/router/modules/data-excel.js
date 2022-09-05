@@ -74,7 +74,7 @@ const dataExcel = {
       component: () => import('@/views/data-excel/indexBatch'),
       meta: {
         activeMenu: '/data-excels',
-        title: 'data_excel',
+        title: 'data_excel_batch',
         icon: 'list',
       },
     },
