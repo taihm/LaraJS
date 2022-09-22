@@ -21,6 +21,30 @@ return [
         'name' => 'Name',
         'content' => 'Content',
 	],
+    'building' => [
+		'id' => 'ID',
+        'name' => 'Name',
+        'address' => 'Address',
+        'status' => 'Status',
+	],
+    'staff' => [
+		'id' => 'ID',
+        'building_id' => 'Building ID',
+        'user_id' => 'User ID',
+        'staff_position_id' => 'Staff position ID',
+        'status' => 'Status',
+	],
+    'staff_position' => [
+		'id' => 'ID',
+        'name' => 'Name',
+        'description' => 'Description',
+	],
+    'support_service' => [
+		'id' => 'ID',
+        'name' => 'Name',
+        'description' => 'Description',
+        'fee' => 'Fee',
+	],
     //{{LANG_TABLE_NOT_DELETE_THIS_LINE}}
     'texts' => [
         'count' => 'Hiển thị {from} đến {to} trong số {count} dữ liệu|{count} dữ liệu|Một dữ liệu',

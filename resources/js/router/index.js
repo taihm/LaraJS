@@ -6,6 +6,10 @@ Vue.use(VueRouter);
 import dashboard from './modules/dashboard';
 import administrator from './modules/administrator';
 import dataExcel from './modules/data-excel';
+import building from './modules/building';
+import staff from './modules/staff';
+import staffPosition from './modules/staff-position';
+import supportService from './modules/support-service';
 // {{$IMPORT_ROUTE_NOT_DELETE_THIS_LINE$}}
 
 /**
@@ -82,6 +86,10 @@ export const constantRouterMap = [
 
 export const asyncRouterMap = [
   dataExcel,
+      building,
+      staff,
+      staffPosition,
+      supportService,
       // {{$ROUTE_ASYNC_NOT_DELETE_THIS_LINE$}},
   administrator,
   { path: '*', redirect: '/404', hidden: true },

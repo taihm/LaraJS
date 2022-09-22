@@ -47,12 +47,20 @@ Route::group(['middleware' => 'auth:api'], function () {
         });
         Route::apiResource('generators', 'GeneratorController');
         Route::apiResource('users', 'UserController');
+        /*<==> Building Route - 2022-09-22 23:20:18 <==>*/
+    Route::apiResource('buildings', 'BuildingController');
         //{{ROUTE_ADMIN_NOT_DELETE_THIS_LINE}}
     });
 
     /*<==> DataExcel Route - 2022-08-02 23:43:11 <==>*/
 
     Route::apiResource('data-excels', 'DataExcelController');
+    /*<==> Staff Route - 2022-09-23 00:15:42 <==>*/
+    Route::apiResource('staff', 'StaffController');
+    /*<==> StaffPosition Route - 2022-09-23 00:33:37 <==>*/
+    Route::apiResource('staff-positions', 'StaffPositionController');
+    /*<==> SupportService Route - 2022-09-23 01:00:48 <==>*/
+    Route::apiResource('support-services', 'SupportServiceController');
     //{{ROUTE_USER_NOT_DELETE_THIS_LINE}}
 });
 
