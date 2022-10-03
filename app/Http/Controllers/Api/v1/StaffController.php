@@ -141,5 +141,11 @@ class StaffController extends Controller
 	    }
     }
 
+    public function getDataCreate()
+    {
+        dd(123);
+    }
+
+
     //{{CONTROLLER_RELATIONSHIP_NOT_DELETE_THIS_LINE}}
 }

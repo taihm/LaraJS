@@ -45,11 +45,15 @@
           prop="status"
           :error="errors.status && errors.status[0]"
           >
-						<el-input-number
-						  v-model="form.status"
-						  name="status"
-						  :placeholder="$t('table.building.status')"
-            />
+            <el-select v-model="form.status" placeholder="Select status">
+              <el-option
+                v-for="item in statusOptions"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value"
+              >
+              </el-option>
+            </el-select>
 					</el-form-item>
           <!--{{$FROM_ITEM_NOT_DELETE_THIS_LINE$}}-->
           <el-form-item class="tw-flex tw-justify-end">
@@ -107,6 +111,15 @@ export default {
         form: false,
         button: false,
       },
+      statusOptions: [
+        {
+        value: 1,
+        label: 'Active',
+        },
+        {
+        value: 0,
+        label: 'Unactive',
+        }],
       // {{$DATA_NOT_DELETE_THIS_LINE$}}
     };
   },
@@ -119,6 +132,9 @@ export default {
         ],
         address: [
           { required: true, message: this.$t('validation.required', { attribute: this.$t('table.building.address') }), trigger: ['change'] },
+        ],
+        status: [
+          { required: true, message: this.$t('validation.required', { attribute: 'Status' }), trigger: ['change'] },
         ],
         // {{$RULES_NOT_DELETE_THIS_LINE$}}
       };

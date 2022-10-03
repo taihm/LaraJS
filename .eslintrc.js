@@ -96,6 +96,7 @@ module.exports = {
         capIsNew: false,
       },
     ],
+    "no-mixed-spaces-and-tabs": 0,
     'new-parens': 2,
     'no-array-constructor': 2,
     'no-caller': 2,

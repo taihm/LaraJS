@@ -24,7 +24,7 @@ class CreateStaffTable extends Migration
             $table->unsignedInteger("building_id");
             $table->unsignedInteger("user_id");
             $table->unsignedInteger("staff_position_id");
-            $table->tinyInteger("status");
+            $table->tinyInteger("status")->default(1);
             $table->timestamps();
         });
     }

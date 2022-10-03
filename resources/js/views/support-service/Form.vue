@@ -45,10 +45,10 @@
           prop="fee"
           :error="errors.fee && errors.fee[0]"
           >
-						<el-input-number
-						  v-model="form.fee"
-						  name="fee"
-						  :placeholder="$t('table.support_service.fee')"
+            <el-input
+              v-model="form.fee"
+              name="fee"
+              :placeholder="$t('table.support_service.fee')"
             />
 					</el-form-item>
           <!--{{$FROM_ITEM_NOT_DELETE_THIS_LINE$}}-->

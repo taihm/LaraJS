@@ -18,6 +18,10 @@ Route::group(['prefix' => 'data-excels'], function () {
     Route::get('batch', 'DataExcelController@getBatch');
     Route::post('import', 'DataExcelController@import');
 });
+
+Route::group(['prefix' => 'staff'], function () {
+    Route::get('get-data-create', 'StaffController@getDataCreate');
+});
 // END - Auth
 Route::group(['middleware' => 'auth:api'], function () {
     Route::get('/fe-logout', 'AuthController@feLogout');
