@@ -20,11 +20,11 @@ class CreateStaffTable extends Migration
     public function up()
     {
         Schema::create('staff', function (Blueprint $table) {
-			$table->bigIncrements("id");
-            $table->integer("building_id");
-            $table->integer("user_id");
-            $table->integer("staff_position_id");
-            $table->integer("status");
+			$table->increments("id");
+            $table->unsignedInteger("building_id");
+            $table->unsignedInteger("user_id");
+            $table->unsignedInteger("staff_position_id");
+            $table->tinyInteger("status");
             $table->timestamps();
         });
     }
