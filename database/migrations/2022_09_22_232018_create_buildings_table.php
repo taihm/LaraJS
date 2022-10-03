@@ -20,7 +20,7 @@ class CreateBuildingsTable extends Migration
     public function up()
     {
         Schema::create('buildings', function (Blueprint $table) {
-			$table->bigIncrements("id");
+			$table->increments("id");
             $table->string("name", 191);
             $table->string("address", 191);
             $table->tinyInteger("status")->default(1);
