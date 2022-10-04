@@ -112,6 +112,15 @@ export default {
         staff_position_id: '',
         status: '',
       }, // {{$$}}
+      building: {
+        name: '',
+        address: '',
+        status: '',
+      },
+      position: {
+        name: '',
+        description: '',
+      },
       loading: {
         form: false,
         button: false,
@@ -150,6 +159,11 @@ export default {
         } = await staffResource.get(id);
         this.form = staff;
       }
+
+      const dataForCreate = await staffResource.getDataCreate();
+      this.building = {};
+      this.position = {};
+
       this.loading.form = false;
     } catch (e) {
       this.loading.form = false;
