@@ -10,9 +10,7 @@
 namespace App\Http\Controllers\Api\v1;
 
 use App\Jobs\ImportJob;
-use App\Models\Building;
 use App\Models\DataExcel;
-use App\Models\StaffPosition;
 use App\Services\QueryService;
 use Illuminate\Bus\Batch;
 use Illuminate\Bus\BatchRepository;
@@ -187,22 +185,16 @@ class DataExcelController extends Controller
      */
     public function getBatch(): JsonResponse
     {
-//        $batchRepository = app()->make(BatchRepository::class);
-//        $result = $batchRepository->get(5);
-        $result             = [];
-        $building           = Building::all();
-        $staffPosition      = StaffPosition::all();
-        $result['building'] = $building;
-        $result['position'] = $staffPosition;
-        return $this->jsonData($result);
-//        return response()->json(
-//            [
-//                'success' => true,
-//                'data' => $result,
-//                'count' => count($result),
-//            ],
-//            200
-//        );
+        $batchRepository = app()->make(BatchRepository::class);
+        $result = $batchRepository->get(5);
+        return response()->json(
+            [
+                'success' => true,
+                'data' => $result,
+                'count' => count($result),
+            ],
+            200
+        );
     }
     //{{CONTROLLER_RELATIONSHIP_NOT_DELETE_THIS_LINE}}
 }
