@@ -22,6 +22,10 @@ Route::group(['prefix' => 'data-excels'], function () {
 Route::group(['prefix' => 'staff'], function () {
     Route::get('get-data-create', 'StaffController@getDataCreate');
 });
+
+Route::group(['prefix' => 'dashboard'], function () {
+    Route::get('get-all', 'DashboardController@getAllData');
+});
 // END - Auth
 Route::group(['middleware' => 'auth:api'], function () {
     Route::get('/fe-logout', 'AuthController@feLogout');
