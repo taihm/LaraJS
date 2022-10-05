@@ -17,11 +17,17 @@
           prop="building_id"
           :error="errors.building_id && errors.building_id[0]"
           >
-						<el-input-number
-						  v-model="form.building_id"
-						  name="building_id"
-						  :placeholder="$t('table.staff.building_id')"
-            />
+            <el-select v-model="form.building_id" placeholder="Select building">
+              <el-option
+                v-for="item in building"
+                :key="item.id"
+                :label="item.name"
+                :value="item.id"
+              >
+                <span style="float: left">{{ item.name }}</span>
+                <span style="float: right; color: #8492a6; font-size: 13px">{{ item.address }}</span>
+            </el-option>
+          </el-select>
 					</el-form-item>
           <el-form-item
           data-generator="user_id"
@@ -29,11 +35,15 @@
           prop="user_id"
           :error="errors.user_id && errors.user_id[0]"
           >
-						<el-input-number
-						  v-model="form.user_id"
-						  name="user_id"
-						  :placeholder="$t('table.staff.user_id')"
-            />
+            <el-select v-model="form.user_id" placeholder="Select user">
+              <el-option
+                v-for="item in users"
+                :key="item.id"
+                :label="item.name"
+                :value="item.id"
+              >
+              </el-option>
+            </el-select>
 					</el-form-item>
           <el-form-item
           data-generator="staff_position_id"
@@ -41,11 +51,15 @@
           prop="staff_position_id"
           :error="errors.staff_position_id && errors.staff_position_id[0]"
           >
-						<el-input-number
-						  v-model="form.staff_position_id"
-						  name="staff_position_id"
-						  :placeholder="$t('table.staff.staff_position_id')"
-            />
+            <el-select v-model="form.staff_position_id" placeholder="Select position">
+              <el-option
+                v-for="item in position"
+                :key="item.id"
+                :label="item.name"
+                :value="item.id"
+              >
+              </el-option>
+            </el-select>
 					</el-form-item>
           <el-form-item
           data-generator="status"
@@ -53,11 +67,15 @@
           prop="status"
           :error="errors.status && errors.status[0]"
           >
-						<el-input-number
-						  v-model="form.status"
-						  name="status"
-						  :placeholder="$t('table.staff.status')"
-            />
+            <el-select v-model="form.status" placeholder="Select status">
+              <el-option
+                v-for="item in statusOptions"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value"
+              >
+              </el-option>
+            </el-select>
 					</el-form-item>
           <!--{{$FROM_ITEM_NOT_DELETE_THIS_LINE$}}-->
           <el-form-item class="tw-flex tw-justify-end">
@@ -112,15 +130,53 @@ export default {
         staff_position_id: '',
         status: '',
       }, // {{$$}}
-      building: {
-        name: '',
-        address: '',
-        status: '',
-      },
-      position: {
-        name: '',
-        description: '',
-      },
+      building: [
+        {
+        id: 1,
+        name: 'tower A',
+        address: '123 abc',
+        status: 1,
+        },
+        {
+          id: 2,
+          name: 'tower B',
+          address: '456 ggg',
+          status: 1,
+        },
+      ],
+      users: [
+        {
+          id: 1,
+          name: 'user A',
+          status: 1,
+        },
+        {
+          id: 2,
+          name: 'user B',
+          status: 1,
+        },
+      ],
+      position: [
+        {
+          id: 1,
+          name: 'Quan ly',
+          description: '',
+        },
+        {
+          id: 2,
+          name: 'Nhan vien',
+          description: '',
+        },
+      ],
+      statusOptions: [
+        {
+          value: 1,
+          label: 'Active',
+        },
+        {
+          value: 0,
+          label: 'Unactive',
+        }],
       loading: {
         form: false,
         button: false,
@@ -160,9 +216,9 @@ export default {
         this.form = staff;
       }
 
-      const dataForCreate = await staffResource.getDataCreate();
-      this.building = {};
-      this.position = {};
+      const { data } = await staffResource.getDataCreate();
+      this.building = data.data.building;
+      this.position = data.data.position;
 
       this.loading.form = false;
     } catch (e) {

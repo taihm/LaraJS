@@ -19,7 +19,7 @@ return [
     // START - staff
 	'staff' => 'Staff',
 	'staff_list' => 'Staff',
-	'staff_create' => 'Create Staff',
+	'staff_create' => 'Create Staff for Building',
 	'staff_edit' => 'Edit Staff',
 	// END - staff
     // START - staff_position

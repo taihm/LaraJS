@@ -29,9 +29,9 @@ return [
 	],
     'staff' => [
 		'id' => 'ID',
-        'building_id' => 'Building ID',
-        'user_id' => 'User ID',
-        'staff_position_id' => 'Staff position ID',
+        'building_id' => 'Building',
+        'user_id' => 'User',
+        'staff_position_id' => 'Staff position',
         'status' => 'Status',
 	],
     'staff_position' => [
