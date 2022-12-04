@@ -27,6 +27,7 @@ Route::group(['prefix' => 'dashboard'], function () {
     Route::get('get-all', 'DashboardController@getAllData');
 });
 // END - Auth
+//test
 Route::group(['middleware' => 'auth:api'], function () {
     Route::get('/fe-logout', 'AuthController@feLogout');
     Route::get('/user-info', 'UserController@userInfo');
